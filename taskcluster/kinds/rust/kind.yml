@@ -1,0 +1,20 @@
+loader: taskgraph.loader.transform:loader
+
+kind-dependencies:
+  - docker-image
+
+transforms:
+    - eije_taskgraph.transforms.rust:transforms
+    - taskgraph.transforms.task:transforms
+    - eije_taskgraph.transforms.common:transforms
+
+task-defaults:
+  worker-type-fmt: linux-small
+  worker-type-build: linux-medium
+  cache-name: tc-slackord
+
+tasks:
+    tc-slackord:
+      package-name: slackord
+      build-result: /builds/worker/target/release/slackord
+      docker-repo: ghcr.io/eijebong/tc-slackord
